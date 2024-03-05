@@ -91,7 +91,8 @@ void initializeCroupier(struct croupier *var2) {
             int i = 1;  // Commencez à partir de la deuxième carte du paquet
             for (; i < sizeof(var2->cardscroupier) / sizeof(var2->cardscroupier[0]); i++) {
                 if (var2->cardscroupier[i] == '?') {
-                    var2->cardscroupier[i] = pack_of_cards[index];
+                    shuffle();
+                    var2->cardscroupier[i] = pack_of_cards[i];
                     index++;
 
                     // Assurez-vous que var2->cardscroupier ne dépasse pas la taille de votre tableau
@@ -513,7 +514,7 @@ void hit_money_player1(struct player1 *var1)
                     flag1 = 1;
                     pasturn1 = 1;
                     total_point_player1 += calculate_the_total_of_points(var1->cardsplayer1);
-                     money_player_1 += 2 * bet_player_1;
+                    money_player_1 += 2 * bet_player_1;
                     break;
                 }
 
@@ -812,7 +813,7 @@ int determin_winner()
       bust_croupier = 1;
    if(total_point_player1 > 21)
       money_player_1 -= bet_player_1;
-   else if ((total_point_croupier > total_point_player1 && bust_croupier == 0) || flag1 == 1)
+   else if (total_point_croupier > total_point_player1 && bust_croupier == 0)
       money_player_1 -= bet_player_1;
    else if(total_point_player1 > total_point_croupier  && bust_croupier == 0 && flag1 == 0)
       money_player_1 += 2 * bet_player_1;
@@ -820,11 +821,11 @@ int determin_winner()
       money_player_2 -= bet_player_2; 
    else if (total_point_player2 > total_point_croupier && bust_croupier == 0 && flag2 == 0)
       money_player_2 += 2 * bet_player_2;
-   else if ((total_point_croupier > total_point_player2 && bust_croupier == 0) || flag2 == 1)
+   else if (total_point_croupier > total_point_player2 && bust_croupier == 0)
       money_player_2 -= bet_player_2;
    if(total_point_player3 > 21)
       money_player_3 -= bet_player_3;
-   else if((total_point_croupier > total_point_player3 && bust_croupier == 0) || flag3 == 1)
+   else if((total_point_croupier > total_point_player3 && bust_croupier == 0))
       money_player_3 -= bet_player_3;
    else if(total_point_player3 > total_point_croupier && bust_croupier == 0 && flag3 == 0)
       money_player_3 += 2 * bet_player_3;     
